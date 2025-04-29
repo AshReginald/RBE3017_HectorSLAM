@@ -1,0 +1,1 @@
+controller_joint_names: ['', 'base_servo_joint', 'end_servo_joint', 'fr_joint', 'fl_joint', 'br_joint', 'bl_joint', ]

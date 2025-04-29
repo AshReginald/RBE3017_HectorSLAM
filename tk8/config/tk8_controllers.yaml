@@ -1,0 +1,12 @@
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+servo_controller:
+  type: position_controllers/JointGroupPositionController 
+  joints: ['base_servo_joint', 'end_servo_joint']
+    
+gazebo_ros_control:
+  pid_gains:
+    base_servo_joint: {p: 50.0, i: 0.1, d: 5.0}
+    end_servo_joint: {p: 50.0, i: 0.1, d: 5.0}

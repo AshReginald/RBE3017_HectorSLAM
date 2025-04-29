@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="tk8">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.00557264023375181 -0.0960602615045691 0.0594169936927835" rpy="0 0 0" />
+      <mass value="0.190548593408447" />
+      <inertia ixx="0.000412726597714719" ixy="2.90219947110223E-06" ixz="9.47643877840415E-06" iyy="0.000171360224234566" iyz="-1.29717645091752E-05" izz="0.000480531579802367" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/base_link.STL" /></geometry>
+      <material name=""><color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/base_link.STL" /></geometry>
+    </collision>
+  </link>
+
+  <link name="laser">
+    <inertial>
+      <origin xyz="0 0 0.015" rpy="0 0 0" />
+      <mass value="0.00942477796076938" />
+      <inertia ixx="9.42477796076938E-07" ixy="-1.67504074041988E-23" ixz="-4.8503981591486E-25" iyy="9.42477796076938E-07" iyz="2.87319053451299E-23" izz="4.71238898038469E-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/lidar_link.STL" /></geometry>
+      <material name=""><color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/lidar_link.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <origin xyz="0.00239 -0.01 0.04579" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="laser" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <link name="base_servo_link">
+    <inertial>
+      <origin xyz="-8.4e-05 0.0061 0.1016" rpy="0 0 0" />
+      <mass value="0.04985" />
+      <inertia ixx="6.4e-05" ixy="7.0e-09" ixz="-2.8e-09" iyy="5.4e-05" iyz="2.3e-06" izz="1.3e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/base_servo_link.STL" /></geometry>
+      <material name=""><color rgba="0.79 0.82 0.93 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/base_servo_link.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="base_servo_joint" type="revolute">
+    <origin xyz="-0.03127 -0.09258 0.11109" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="base_servo_link" />
+    <axis xyz="0 0 -1" />
+    <limit lower="0" upper="3.1416" effort="1" velocity="1.5" />
+    <initial_position>0.0</initial_position>
+    <dynamics damping="0.1" friction="0.5"/>
+  </joint>
+
+  <link name="end_servo_link">
+    <inertial>
+      <origin xyz="0.0101 -0.1513 -0.0443" rpy="0 0 0" />
+      <mass value="0.06883" />
+      <inertia ixx="6.9e-05" ixy="3.0e-09" ixz="1.1e-07" iyy="2.7e-05" iyz="1.5e-08" izz="5.2e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/end_servo_link.STL" /></geometry>
+      <material name=""><color rgba="0.79 0.82 0.93 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/end_servo_link.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="end_servo_joint" type="revolute">
+    <origin xyz="-0.00015 0.03865 0.12837" rpy="-1.5708 0 0.00071" />
+    <parent link="base_servo_link" />
+    <child link="end_servo_link" />
+    <axis xyz="0 0 -1" />
+    <limit lower="0" upper="3.1416" effort="1" velocity="1.5" />
+    <initial_position>0.0</initial_position>
+    <dynamics damping="0.1" friction="0.5"/>
+  </joint>
+
+  <link name="camera_link">
+    <inertial>
+      <origin xyz="0 0.0075 0.005" rpy="0 0 0" />
+      <mass value="0.003" />
+      <inertia ixx="8.1e-08" ixy="0" ixz="0" iyy="1.2e-07" iyz="0" izz="1.5e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/camera_link.STL" /></geometry>
+      <material name=""><color rgba="0.79 0.82 0.93 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/camera_link.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="0.0245 -0.1798 -0.05198" rpy="1.5708 0 0" />
+    <parent link="end_servo_link" />
+    <child link="camera_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <link name="fr_link">
+    <inertial>
+      <origin xyz="0 0 0.008" rpy="0 0 0" />
+      <mass value="0.05374" />
+      <inertia ixx="2.1e-05" ixy="0" ixz="0" iyy="2.1e-05" iyz="0" izz="3.9e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/fr_link.STL" /></geometry>
+      <material name=""><color rgba="0.79 0.82 0.93 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/fr_link.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="fr_joint" type="continuous">
+    <origin xyz="0.0833 -0.032 0.03179" rpy="1.5708 0 -1.5708" />
+    <parent link="base_link" />
+    <child link="fr_link" />
+    <axis xyz="0 0 1" />
+    <dynamics friction="0.4" damping="0.5" />
+  </joint>
+
+  <link name="fl_link">
+    <inertial>
+      <origin xyz="0 0 -0.008" rpy="0 0 0" />
+      <mass value="0.05374" />
+      <inertia ixx="2.1e-05" ixy="0" ixz="0" iyy="2.1e-05" iyz="0" izz="3.9e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/fl_link.STL" /></geometry>
+      <material name=""><color rgba="0.79 0.82 0.93 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/fl_link.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="fl_joint" type="continuous">
+    <origin xyz="-0.0787 -0.032 0.03179" rpy="1.5708 0 -1.5708" />
+    <parent link="base_link" />
+    <child link="fl_link" />
+    <axis xyz="0 0 1" />
+    <dynamics friction="0.4" damping="0.5" />
+  </joint>
+
+  <link name="br_link">
+    <inertial>
+      <origin xyz="0 0 -0.008" rpy="0 0 0" />
+      <mass value="0.05374" />
+      <inertia ixx="2.1e-05" ixy="0" ixz="0" iyy="2.1e-05" iyz="0" izz="3.9e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/br_link.STL" /></geometry>
+      <material name=""><color rgba="0.79 0.82 0.93 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/br_link.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="br_joint" type="continuous">
+    <origin xyz="0.0833 -0.195 0.03179" rpy="1.5708 0 1.5708" />
+    <parent link="base_link" />
+    <child link="br_link" />
+    <axis xyz="0 0 -1" />
+    <dynamics friction="0.4" damping="0.5" />
+  </joint>
+
+  <link name="bl_link">
+    <inertial>
+      <origin xyz="0 0 0.008" rpy="0 0 0" />
+      <mass value="0.05374" />
+      <inertia ixx="2.1e-05" ixy="0" ixz="0" iyy="2.1e-05" iyz="0" izz="3.9e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/bl_link.STL" /></geometry>
+      <material name=""><color rgba="0.79 0.82 0.93 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry><mesh filename="package://tk8/meshes/bl_link.STL" /></geometry>
+    </collision>
+  </link>
+  <joint name="bl_joint" type="continuous">
+    <origin xyz="-0.0787 -0.195 0.03179" rpy="1.5708 0 1.5708" />
+    <parent link="base_link" />
+    <child link="bl_link" />
+    <axis xyz="0 0 -1" />
+    <dynamics friction="0.4" damping="0.5" />
+  </joint>
+
+  <transmission name="base_servo_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="base_servo_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="base_servo_motor"><mechanicalReduction>1</mechanicalReduction></actuator>
+  </transmission>
+
+  <transmission name="end_servo_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="end_servo_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="end_servo_motor"><mechanicalReduction>1</mechanicalReduction></actuator>
+  </transmission>
+
+  <!-- Camera Plugin -->
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="camera1">
+      <pose>0 0 0 3.14 -1.5787 0</pose>  
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>rrbot/camera1</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- Lidar Plugin -->
+  <gazebo reference="laser">
+    <material>Gazebo/Black</material>
+    <sensor type="ray" name="lidar_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>20</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>0</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.1</min>
+          <max>12.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="lidar_controller" filename="libgazebo_ros_laser.so">
+        <topicName>scan</topicName>
+        <frameName>laser</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+     <gazebo>
+    <plugin name="gazebo_ros_diff_drive_front" filename="libgazebo_ros_diff_drive.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>       
+      <odometryFrame>odom</odometryFrame>
+      <odometrySource>world</odometrySource>
+      <publishOdomTF>true</publishOdomTF>        
+      <publishWheelTF>false</publishWheelTF>
+      <publishTf>true</publishTf>            
+      <publishWheelJointState>false</publishWheelJointState> 
+      <updateRate>30</updateRate>
+      <leftJoint>fl_joint</leftJoint>
+      <rightJoint>fr_joint</rightJoint>
+      <wheelSeparation>0.166</wheelSeparation>
+      <wheelDiameter>0.07</wheelDiameter>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <wheelAcceleration>1</wheelAcceleration>
+      <wheelTorque>10</wheelTorque>
+      <rosDebugLevel>na</rosDebugLevel>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="gazebo_ros_diff_drive_rear" filename="libgazebo_ros_diff_drive.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryFrame>odom_rear_only</odometryFrame> 
+      <odometrySource>world</odometrySource>
+      <publishOdomTF>false</publishOdomTF>      
+      <publishWheelTF>false</publishWheelTF>
+      <publishTf>false</publishTf>           
+      <publishWheelJointState>false</publishWheelJointState> 
+      <legacyMode>false</legacyMode>
+      <updateRate>30</updateRate>
+      <leftJoint>bl_joint</leftJoint>
+      <rightJoint>br_joint</rightJoint>
+      <wheelSeparation>0.166</wheelSeparation> 
+      <wheelDiameter>0.07</wheelDiameter>   
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <wheelAcceleration>1</wheelAcceleration>
+      <wheelTorque>10</wheelTorque>
+      <rosDebugLevel>na</rosDebugLevel>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <jointName>fl_joint, fr_joint, bl_joint, br_joint</jointName> 
+      <updateRate>30</updateRate>
+    </plugin>
+  </gazebo>
+
+  <gazebo>  
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <legacyModeNS>true</legacyModeNS>
+    </plugin>
+  </gazebo> 
+</robot>
