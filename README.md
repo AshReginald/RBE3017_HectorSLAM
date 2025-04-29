@@ -70,6 +70,7 @@ Truy cập vào thư mục:
 catkin_ws/src/tk8/maps
 
 Và xóa hai tệp bản đồ cũ (nếu có):
+
 turtle1.pgm
 
 turtle1.yaml
